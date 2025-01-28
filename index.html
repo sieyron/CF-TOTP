@@ -8,8 +8,10 @@
 <meta name="keywords" content="authenticator, gembok, 2fa, otp generator">
 <meta property="og:title" content="Gembok Authenticator - Simple 2FA Authenticator">
 <meta property="og:description" content="Generate 2-Step authentication token using browser">
+<!--
 <meta property="og:url" content="https://rioastamal.net/gembok/">
 <meta property="og:image" content="https://rioastamal.net/gembok/assets/cover.jpg">
+-->
 <meta charset="utf-8">
 <style>
 html {
@@ -189,6 +191,45 @@ pre code.break {
     width: 25%; display: inline-block;
   }
 }
+/* Modal style*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.modal-content input {
+  padding: 10px;
+  width: 80%;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.modal-content button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.modal-content button:hover {
+  background-color: #45a049;
+}
 </style>
 <!--
 <script src="https://cdn.jsdelivr.net/npm/otpauth/dist/otpauth.umd.min.js"></script>
@@ -212,16 +253,18 @@ pre code.break {
 <div id="menu" class="menu">
   <div class="menu-close"><a title="Tutup menu" href="#">X</a></div>
   <ul class="menu-list">
+    <!--
     <li>
       <a id="menu-open-file" href="#">Open File...</a>
     </li>
+    -->
     <li><a id="menu-main" href="#main">Tokens</a></li>
     <li><a id="menu-help" href="#help">Help</a></li>
     <li><a id="menu-about" href="#about">About</a></li>
   </ul>
   <div class="menu-footer">
     <span>Gembok Authenticator v1.2</span>
-    <span>Made with &#x2665; by <a href="https://rioastamal.net/">Rio Astamal</a></span>
+    <span>Made with &#x2665; by <a href="https://github.com/sieyron">Sieyron</a> based on <a href="https://github.com/rioastamal/gembok">Rio Astamal Gembok</a></span>
   </div>
 </div>
 
@@ -257,7 +300,7 @@ pre code.break {
       - Initial release of Gembok Authenticator</p>
 
     <h3 class="item-title">Author</h3>
-    <p class="item-desc">This application is written by <b><a href="https://rioastamal.net/">Rio Astamal</a></b>.</p>
+    <p class="item-desc">This application is based on <b><a href="https://github.com/rioastamal/gembok">Rio Astamal Gembok</a></b>.</p>
 
     <h3 class="item-title">License</h3>
     <p class="item-desc">This application is open source licensed under
@@ -305,7 +348,9 @@ pre code.break {
   }
 ]</code></pre>
   <p class="item-desc">The only required attributes are &quot;provider&quot; and &quot;secret&quot; the rest are optional.</p>
+  <!--
   <p class="item-desc">Save the JSON file and then use Open File... menu to load the file. You should now see 4 items being displayed.</p>
+  -->
 
   <p class="item-desc">You can also encrypt JSON file using AES-256-CBC and Gembok Authenticator automatically ask you passphrase and try to decrypt the file automatically. Here is an example of above JSON encrypted with AES-256-CBC with passphrase &quot;gembok-authenticator&quot;.</p>
 <pre><code class="break">U2FsdGVkX1/QSAvwH5h14leaLOcB0On3cALWPUHN4tuuvdyN4/rzh97awj0bBxXO72JneBjUIOxvHC2u+srnbW6vyykcnSsXPFidXrajeExIiYBD8SWG/AphYqnJYJGdRDb+DDnWEP/ST9ZkWCjOrQZcBTtsuBJFAMjSC2pOeA5GHZve2FFoNWQZsL1AeTJYBl7GzCenqC/Qxs9mFOuEyMs4bWakji/puY4pXpf/b4dWx7i5tktOX06LFzwnclWuqoCHzwtvnHwWDAKONZ39OD2hfY+iO/AilfnJQNhdfKVs5CyJlfwG9/NP6lYpjGpcaxm5bM6QRoEvqlKSP1KaGRQwaUcftBD+p+hdYwLq1YFjDQIXgoM680XU1mS3o0U6+4lsBzkqYrYP8HUBQEYdg5gnrCD9/3wI5TbzgnUqHAUgwI7JP6Rh/7FAwj3jkNRYOhjk58NGwORu0InzOKwIrCv8fCx/WfEMPJgczE3kL5kytMIwKX3IiedUfKNSQRGYVAU4Vo9cnLqCeWmN/V+UyFMmPiuUHa+PwtARS919nLj00MMAQfCNGv3OxPNE/6qdXAzbB3tHzuUQdcg+kEjBBErlGceaXx1CAzPgdzcnEPkJk1kERo1L4TRmGn5QmDr3Tdn82Aua0MrXEAzVxHmX7EFaEZ9mtJG9E+/MupDw5kzJqPvPEHYxSP6/fsNzvLVJ5O4euSPahvPsNCh4itTlQ9NkfIdCs/cwPaZ8Pb0e32wo46ilt03+2FVZTIzfNvZY2W+lZmUforNrZsmxnkFxQRJfWwCfFA1vBPo/1n06Lk94+mLiDS6Ag8Q/Cwfhm4aKef4fZVRePmCzeyKXNQS7M6BW07zWjDkJDX8dwup2R80=</code></pre>
@@ -314,10 +359,25 @@ pre code.break {
 
 <div class="items-container main pages">
   <div class="item">
-    <h3 class="item-title">No data</h3>
-    <p class="item-desc">Click &quot;Open File...&quot; to load your data.</p>
+    <h3 class="item-title">Please wait</h3>
+    <p class="item-desc">Loading TOTP database.</p>
   </div>
 </div>
+
+<div id="passphraseModal" class="modal">
+  <div class="modal-content">
+    <h3>Enter passphrase</h3>
+    <input type="password" id="passphraseInput" placeholder="Passphrase">
+    <button id="submitPassphrase">Submit</button>
+  </div>
+</div>
+
+<template id="fail-template">
+  <div class="item">
+    <h3 class="item-title">TOTP error!</h3>
+    <p class="item-desc">Please refresh the website.</p>
+  </div>
+</template>
 
 <!-- HIDDEN INPUT FILE -->
 <input type="file" id="file-open-input" accept=".json" class="hide">
@@ -340,24 +400,77 @@ function createItem(options) {
       $('.items-container').insertAdjacentHTML('beforeend', itemHtml);
 }
 
-function parseEncryptedJson(jsonData) {
-  jsonData = jsonData.trim();
-  if (jsonData.charAt(0) === '[') {
-    return jsonData;
+function showModal() {
+  const modal = document.getElementById('passphraseModal');
+  var itemsNode = $('.items-container');
+  if (itemsNode) {
+    itemsNode.innerHTML = `
+    <div class="item">
+      <h3 class="item-title">Please wait</h3>
+      <p class="item-desc">Loading TOTP database.</p>
+    </div>
+    `;
   }
-
-  // It should be encrypted JSON with AES
-  var password = prompt('Enter passphrase');
-  if (password === null) {
-    throw 'Can not decrypt file, invalid passphrase.';
-  }
-
-  return CryptoJS.AES.decrypt(jsonData, password).toString(CryptoJS.enc.Utf8);
+  modal.style.display = 'flex';
 }
 
-function loadItems(jsonData) {
+function hideModal() {
+  resetState();
+  const modal = document.getElementById('passphraseModal');
+  modal.style.display = 'none';
+}
+
+function parseEncryptedJson(jsonData) {
+  return new Promise((resolve, reject) => {
+    jsonData = jsonData.trim();
+    if (jsonData.charAt(0) === '[') {
+      resolve(jsonData);
+      return;
+    }
+
+    // It should be encrypted JSON with AES
+    //var password = prompt('Enter passphrase');
+    showModal();
+
+    document.getElementById('passphraseInput').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        document.getElementById('submitPassphrase').click();
+      }
+    });
+
+    document.getElementById('submitPassphrase').addEventListener('click', function handleSubmit() {
+      const password = document.getElementById('passphraseInput').value;
+      if (password === null || password.trim() === '') {
+        resetState(true);
+        reject('Can not decrypt file, invalid passphrase.');
+        return;
+      }
+
+      var decryptedData = CryptoJS.AES.decrypt(jsonData, password);
+      try {
+        var utf8Data = decryptedData.toString(CryptoJS.enc.Utf8);
+
+        if (!utf8Data) {
+          resetState(true);
+          reject('Can not decrypt file, invalid passphrase.');
+          return;
+        }
+
+        resolve(utf8Data);
+      } catch (error) {
+        resetState(true);
+        reject('Can not decrypt file, invalid passphrase.');
+      }
+      hideModal();
+    });
+  });
+}
+
+async function loadItems(jsonData) {
   try {
-    var items = JSON.parse(parseEncryptedJson(jsonData));
+    const decryptedJsonData = await parseEncryptedJson(jsonData);
+
+    var items = JSON.parse(decryptedJsonData);
     for (var i=0; i<items.length; i++) {
       var identifier = items[i].provider + '-' + i;
       items[i].identifier = identifier;
@@ -370,10 +483,12 @@ function loadItems(jsonData) {
   } catch(e) {
     if (e.name === "SyntaxError") {
       alert('Failed to load JSON file, make sure it is valid.');
+      resetState(true);
       return;
     }
 
     alert(e.toString());
+    resetState(true);
   }
 }
 
@@ -413,7 +528,7 @@ function updateProgressBar(item) {
   }, 1000);
 }
 
-function resetState() {
+function resetState(isError = false) {
   for (timerName in timer) {
     clearTimeout(timer[timerName]);
   }
@@ -425,6 +540,13 @@ function resetState() {
   var itemsNode = $('.items-container');
   while (itemsNode.firstChild) {
     itemsNode.removeChild(itemsNode.lastChild);
+  }
+
+  if (isError) {
+    var failTemplate = document.querySelector('#fail-template');
+    if (failTemplate) {
+      itemsNode.innerHTML = failTemplate.innerHTML;
+    }
   }
 }
 
@@ -458,12 +580,14 @@ function copyToClipboard(text) {
   }, 3000);
 }
 
+/*
 $('#menu-open-file').onclick = function(e) {
   if (fileOpenInput) {
     fileOpenInput.value = ''; // force 'onchange' event
     fileOpenInput.click();
   }
 }
+*/
 
 $('#menu-main').onclick = function(e) {
   openPage('main');
@@ -477,6 +601,7 @@ $('#menu-help').onclick = function(e) {
   openPage('help');
 }
 
+/*
 fileOpenInput.onchange = function(e) {
   var file = fileOpenInput.files[0];
   var reader = new FileReader();
@@ -488,6 +613,19 @@ fileOpenInput.onchange = function(e) {
   }
   reader.readAsText(file);
 }
+*/
+
+fetch('encrypted.sample.json')
+  .then(response => response.text())
+  .then(data => {
+    resetState();
+    loadItems(data);
+    openPage('main');
+  })
+  .catch(error => {
+    // No logs or any actions here
+  });
 </script>
 </body>
 </html>
+

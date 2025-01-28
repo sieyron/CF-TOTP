@@ -76,7 +76,7 @@ You can try to open file `build/index.html` using web browser.
 You can encrypt JSON file with AES-256-CBC and Gembok Authenticathor automatically try to decrypt them. As an example you can use following OpenSSL command to encrypt.
 
 ```
-$ openssl enc -aes-256-cbc -in sample.json -out encrypted.sample.json -pass pass:"gembok-authenticator" -e -base64 -A
+$ openssl aes-256-cbc -in sample.json -out encrypted.sample.json -pass pass:"gembok-authenticator" -e -base64 -A -md md5
 ```
 
 #### Option 2
@@ -110,7 +110,7 @@ Gembok Authenticator uses following library.
 
 ## Author
 
-This application is written by Rio Astamal &lt;rio@rioastamal.net&gt;
+This application was originally written by Rio Astamal &lt;rio@rioastamal.net&gt;
 
 ## License
 

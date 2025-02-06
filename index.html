@@ -615,7 +615,7 @@ fileOpenInput.onchange = function(e) {
 }
 */
 
-fetch('encrypted.sample.json')
+fetch('https://cdn.jsdelivr.net/gh/sieyron/CF-TOTP/sample.json')
   .then(response => response.text())
   .then(data => {
     resetState();
